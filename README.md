@@ -15,7 +15,8 @@ A powerful and modern desktop AutoTyper app, built in Python, with global hotkey
 - 🧠 Your branding: **Yunuz's AutoTyper**
 
 ## 📷 Screenshot
-> *(Add your app screenshot here)*
+> ![Screenshot 2025-06-18 101441](https://github.com/user-attachments/assets/07750d31-161c-407c-90d8-761f228ce4b1)
+
 
 ## 🚀 Setup
 
