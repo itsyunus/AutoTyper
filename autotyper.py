@@ -13,7 +13,7 @@ from cryptography.fernet import Fernet
 # === Configuration ===
 APP_NAME = "Yunuz's AutoTyper"
 PRESET_FILE = "src/presets.json"
-ENCRYPTION_KEY = b'ZmRoZXdvcmxkeXVudXp9ZmRoZXdvcmxkeXVudXp9ZA=='  # 'ftheworldyunuz' padded to 32 bytes and base64-encoded
+ENCRYPTION_KEY = os.environ.get('AUTOTYPER_FERNET_KEY')
 ENCRYPTED_FILE = "src/encrypted.py"
 
 # === Global Variables ===
@@ -36,7 +36,9 @@ def stop_typing():
 # === Encryption Utility ===
 def encrypt_code():
     try:
-        cipher = Fernet(ENCRYPTION_KEY)
+        if not ENCRYPTION_KEY:
+            raise ValueError("Set AUTOTYPER_FERNET_KEY before using source encryption.")
+        cipher = Fernet(ENCRYPTION_KEY.encode("ascii"))
         with open(__file__, 'rb') as f:
             data = f.read()
         encrypted = cipher.encrypt(data)
