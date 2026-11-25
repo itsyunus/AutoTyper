@@ -1,26 +1,43 @@
-# Yunuz's AutoTyper 🧠⌨️
+# Yunuz's AutoTyper
 
-A powerful and modern desktop AutoTyper app, built in Python, with global hotkeys, encryption, presets, and a slick tray icon.
+A small Python desktop utility for typing text into the focused application. It includes a Tkinter interface, start and stop hotkeys, saved presets, a system-tray menu, and an optional helper that encrypts the Python source file.
 
-## 💡 Features
+## Features
 
-- 🔁 Auto-type any text with customizable delay
-- 💾 Save/Load typing presets
-- 🔒 Encrypt source code with a secret key (`ftheworldyunuz`)
-- 🧩 System tray support with Show/Exit options
-- 🎛️ Global Hotkeys:
-  - `Ctrl + Alt + T` → Start typing
-  - `Ctrl + Alt + S` → Stop typing
-- 📦 Build `.exe` installer using `PyInstaller`
-- 🧠 Your branding: **Yunuz's AutoTyper**
+- Type entered text with a configurable delay
+- Save and reload a text and delay preset
+- Start with `Ctrl + Alt + T` and stop with `Ctrl + Alt + S`
+- Minimize to the system tray
+- Optionally encrypt the source file using a user-provided Fernet key
 
-## 📷 Screenshot
-> ![Screenshot 2025-06-18 101441](https://github.com/user-attachments/assets/07750d31-161c-407c-90d8-761f228ce4b1)
+## Run locally
 
+Requirements: Python 3 and the packages below. Tkinter must also be available in your Python installation.
 
-## 🚀 Setup
-
-### 1. Clone this repo
 ```bash
-git clone https://github.com/yourusername/yunuz-autotyper.git
-cd yunuz-autotyper
+git clone https://github.com/itsyunus/AutoTyper.git
+cd AutoTyper
+python -m pip install pyautogui pynput pystray pillow cryptography
+python autotyper.py
+```
+
+## Optional source encryption
+
+The encryption helper reads a key from the `AUTOTYPER_FERNET_KEY` environment variable. Generate a key locally with:
+
+```bash
+python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+```
+
+Set the generated value in your local environment before using the **Encrypt Code** button. Keep it out of source control. This helper encrypts a copy of the source file; it is not a substitute for protecting credentials or distributing a secure application.
+
+## Build
+
+Install PyInstaller, then run:
+
+```bash
+python -m pip install pyinstaller
+pyinstaller autotyper.spec
+```
+
+The generated application is placed in PyInstaller's output directory.
